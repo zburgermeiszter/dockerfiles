@@ -3,7 +3,7 @@ FROM alpine:2.7
 MAINTAINER Zoltan Burgermeiszter <zoltan@burgermeiszter.com>
 
 RUN apk update && \
-    apk add asterisk asterisk-sample-config
+    apk add asterisk
 
 EXPOSE 5060
 
