@@ -6,4 +6,4 @@ Preconfigured user mode for running apps in unprivileged mode.
 
 Use it as a base image in your Dockerfile:
 
-`FROM zburgermeiszter/alpine-usermode:3.3`
+`FROM zburgermeiszter/usermode-alpine:3.3`
