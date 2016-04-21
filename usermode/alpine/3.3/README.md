@@ -1,6 +1,6 @@
 # Alpine Linux 3.3 usermode base image #
 
-Preconfigured user mode for running apps in unprivileged mode.
+Preconfigured user mode for running apps with correct file permissions.
 
 **Usage:**
 
