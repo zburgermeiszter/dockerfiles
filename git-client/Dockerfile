@@ -13,6 +13,6 @@ USER user
 
 WORKDIR /home/user/git
 
-VOLUME ["/home/user"]
+VOLUME ["/home/user/git"]
 
 ENTRYPOINT ["git"]
