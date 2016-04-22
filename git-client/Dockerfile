@@ -11,6 +11,8 @@ RUN echo -e 'Host *\nUseRoaming no' >> /etc/ssh/ssh_config
 
 USER user
 
+RUN mkdir -p /home/user/git
+
 WORKDIR /home/user/git
 
 VOLUME ["/home/user/git"]
