@@ -16,4 +16,6 @@ RUN wget http://downloads.sourceforge.net/project/keepass/KeePass%202.x/2.32/Kee
     unzip keepass.zip -d .keepass && \
     rm keepass.zip
 
+ENV HOME /home/user/keepass
+
 ENTRYPOINT ["/usr/bin/mono","/home/user/.keepass/KeePass.exe"]
