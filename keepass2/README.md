@@ -6,8 +6,7 @@ sudo docker run --rm -it \
 --net=none \
 -v ~/.Xauthority:/root/.Xauthority \
 -v /tmp/.X11-unix:/tmp/.X11-unix \
--v $HOME/keepass/keepass.kdbx:/home/user/keepass.kdbx \
--v $HOME/keepass/keepass.key:/home/user/keepass.key \
+- v $HOME/keepass:/home/user/keepass \
 -e DISPLAY=unix$DISPLAY \
 zburgermeiszter/keepass2
 ```
@@ -19,8 +18,7 @@ sudo docker run --rm -it \
 --net=none \
 -v ~/.Xauthority:/root/.Xauthority \
 -v /tmp/.X11-unix:/tmp/.X11-unix \
--v $HOME/keepass/keepass.kdbx:/home/user/keepass.kdbx \
--v $HOME/keepass/keepass.key:/home/user/keepass.key \
+- v $HOME/keepass:/home/user/keepass \
 -e DISPLAY=unix$DISPLAY \
 zburgermeiszter/keepass2
 ```
