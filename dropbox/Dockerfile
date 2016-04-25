@@ -10,9 +10,7 @@ RUN apk add --no-cache ca-certificates python \
     && mkdir -p /home/user/.dropbox /home/user/Dropbox \
     && chmod +x /usr/local/bin/dropbox-cli \
     && chown user:user /usr/local/bin/dropbox-cli \
-    && chown user:user /home/user/.dropbox-dist \
-    && chown user:user /home/user/.dropbox \
-    && chown user:user /home/user/Dropbox
+    && chown user:user -R /home/user/
 
 USER user
 
