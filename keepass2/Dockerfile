@@ -18,4 +18,4 @@ RUN wget http://downloads.sourceforge.net/project/keepass/KeePass%202.x/2.32/Kee
 
 ENV HOME /home/user/keepass
 
-ENTRYPOINT ["/usr/bin/mono","/home/user/.keepass/KeePass.exe"]
+ENTRYPOINT ["/bin/sh","-c","/usr/bin/mono /home/user/.keepass/KeePass.exe"]

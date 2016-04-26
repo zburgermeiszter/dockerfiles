@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=KeePass2
+GenericName=Password manager
+Exec=xterm -e "xhost + && docker run -d --net=none -v ~/.Xauthority:/root/.Xauthority -v /tmp/.X11-unix:/tmp/.X11-unix -v $HOME/keepass:/home/user/keepass -e DISPLAY=unix$DISPLAY zburgermeiszter/keepass2 && exit"
+Icon=/usr/share/icons/keepass2.png
+Terminal=false
+Type=Application
+StartupNotify=false
+Categories=Utility;
+MimeType=application/x-keepass2;
