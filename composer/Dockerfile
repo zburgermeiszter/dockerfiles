@@ -34,6 +34,11 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN php --version
 RUN composer --version
 
+RUN groupadd -g 1000 user && \
+    useradd -u 1000 -g 1000 -m user
+
+USER user
+
 VOLUME ["/app"]
 WORKDIR /app
 
