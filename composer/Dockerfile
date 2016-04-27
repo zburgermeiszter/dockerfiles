@@ -22,22 +22,20 @@ RUN echo "memory_limit=-1" > $PHP_INI_DIR/conf.d/memory-limit.ini
 # Time Zone
 RUN echo "date.timezone=${PHP_TIMEZONE:-UTC}" > $PHP_INI_DIR/conf.d/date_timezone.ini
 
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Create user
+RUN useradd -u 1000 -mU user && \
+    mkdir /app && \
+    chown -R user:user /app
+
+USER user
+
 # Environmental Variables
-ENV COMPOSER_HOME /root/composer
+ENV COMPOSER_HOME /home/user/composer
 
 # Add global binary directory to path
 ENV PATH $COMPOSER_HOME/vendor/bin:$PATH
-
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-# Display PHP version
-RUN php --version
-RUN composer --version
-
-RUN groupadd -g 1000 user && \
-    useradd -u 1000 -g 1000 -m user
-
-USER user
 
 VOLUME ["/app"]
 WORKDIR /app
