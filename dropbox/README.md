@@ -1,65 +1,43 @@
-Dropbox in Docker with dropbox-cli tool
-
-Based on Alpine linux for minimal size.
-
-LAN sync: -p 17500:17500
-
-Volumes:
---------
--
--
-
-folder mount or inter-container with --volumes-from
-
-
-
-
---------------------------------------------------------
-
-http://www.dropboxwiki.com/tips-and-tricks/using-the-official-dropbox-command-line-interface-cli
-
-Docker run example:
-sudo docker run -d -h dropbox --name dropbox -v /path/to/local/config:/root/.dropbox -v /path/to/DB/files/folder:/root/Dropbox -v /etc/localtime:/etc/localtime:ro mhimmer/drop
-
-To check up on current status:
-sudo docker exec dropbox dropbox.py status
-
-
-docker run -d --name="dropbox" --privileged=true --net="host" -v /path/to/your/config:/home/.dropbox -v /path/to/your/files:/home/Dropbox -v /etc/localtime:/etc/localtime:ro gfjardim/dropbox
-
-
-https://raw.githubusercontent.com/janeczku/docker-dropbox/master/README.md
 # Dropbox in Docker
+
+**Based on Alpine linux for minimal size.  
+It's less than half size of any traditional Debian or Ubuntu based Dropbox image.**
 
 Run Dropbox inside Docker. Fully working with local host folder mount or inter-container linking (via `--volumes-from`).
 
-This repository provides the [janeczku/dropbox](https://registry.hub.docker.com/u/janeczku/dropbox/) image.
+This repository provides the [zburgermeiszter/dropbox](https://registry.hub.docker.com/u/zburgermeiszter/dropbox/) image.
 
 ## Usage examples
 
 ### Quickstart
 
-    docker run -d --restart=always --name=dropbox janeczku/dropbox
+    docker run -d --restart=always --name=dropbox zburgermeiszter/dropbox
 
 ### Dropbox data mounted to local folder on the host
 
     docker run -d --restart=always --name=dropbox \
-    -v /path/to/localfolder:/dbox/Dropbox \
-    janeczku/dropbox
-
-### Run dropbox with custom user/group id
-This fixes file permission errrors that might occur when mounting the Dropbox file folder (`/dbox/Dropbox`) from the host or a Docker container volume. You need to set `DBOX_UID`/`DBOX_GID` to the user id and group id of whoever owns these files on the host or in the other container.
+    -v /path/to/dropbox/data:/home/user/Dropbox \
+    zburgermeiszter/dropbox
+    
+### Keep Dropbox data and settings on a host folder
+This way there's no need to reauthorize the container with Dropbox account, and it's possible to run multiple Dropbox instances simply by changing name and the path to dropbox settings.
 
     docker run -d --restart=always --name=dropbox \
-    -e DBOX_UID=110 \
-    -e DBOX_GID=200 \
-    janeczku/dropbox
+    -v /path/to/dropbox/data:/home/user/Dropbox \
+    -v /path/to/dropbox/settings:/home/user/.dropbox \
+    zburgermeiszter/dropbox
+
+### Use the host timezone in the container
+	
+    docker run -d --restart=always --name=dropbox \
+    -v /etc/localtime:/etc/localtime:ro \
+    zburgermeiszter/dropbox
 
 ### Enable LAN Sync
 
     docker run -d --restart=always --name=dropbox \
-    --net="host" \
-    janeczku/dropbox
+    -p 17500:17500 \
+    zburgermeiszter/dropbox
 
 ## Linking to Dropbox account after first start
 
@@ -67,37 +45,33 @@ Check the logs of the container to get URL to authenticate with your Dropbox acc
 
     docker logs dropbox
 
-Copy and paste the URL in a browser and login to your Dropbox account to associate.
+Copy and paste the URL in a browser and login to your Dropbox account to associate the container with your Dropbox account.
 
-    docker logs dropbox
-
-You should see something like this:
+Running the previous command again after a few seconds, you should see something like this:
 
 > "This computer is now linked to Dropbox. Welcome xxxx"
 
+Now your container is syncing your Dropbox.
+
+## Managing Dropbox sync via `dropbox-cli` tool.
+	
+    docker exec -it $(docker ps -f name=dropbox -q | awk 'NR==1{print $1}') dropbox-cli help
+    
+Make sure to use the exact name of the container otherwise running containers with similar names like `dropbox` and `dropbox2` gives arbitrary result when using `dropbox` in the filer.
+
+More info about `dropbox-cli`: [Dropbox Wiki](http://www.dropboxwiki.com/tips-and-tricks/using-the-official-dropbox-command-line-interface-cli)
+
 ## Manage exclusions and check sync status
 
-    docker exec -t -i dropbox dropbox help
-
-## ENV variables
-
-**DBOX_UID**  
-Default: `1000`  
-Run Dropbox with a custom user id (matching the owner of the mounted files)
-
-**DBOX_GID**  
-Default: `1000`  
-Run Dropbox with a custom group id (matching the group of the mounted files)
-
-**$DBOX_SKIP_UPDATE**  
-Default: `False`  
-Set this to `True` to skip updating to the latest Dropbox version on container start
-
+    docker exec -ti dropbox dropbox\ help
 
 ## Exposed volumes
 
-`/dbox/Dropbox`
+`/home/user/Dropbox`
 Dropbox files
 
-`/dbox/.dropbox`
+`/home/user/.dropbox`
 Dropbox account configuration
+
+## Credits
+This `README` is based on Jan B's [janeczku/docker-dropbox](https://github.com/janeczku/docker-dropbox) repository readme.
