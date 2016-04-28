@@ -10,7 +10,8 @@ RUN apk add --no-cache ca-certificates python \
     && mkdir -p /home/user/.dropbox /home/user/Dropbox \
     && chmod +x /usr/local/bin/dropbox-cli \
     && chown user:user /usr/local/bin/dropbox-cli \
-    && chown user:user -R /home/user/
+    && chown user:user -R /home/user/ \
+    && echo "Installed Dropbox version:" $(cat /home/user/.dropbox-dist/VERSION)
 
 USER user
 
