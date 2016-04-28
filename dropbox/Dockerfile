@@ -15,7 +15,7 @@ RUN apk add --no-cache ca-certificates python \
 
 USER user
 
-WORKDIR /home/user
+WORKDIR /home/user/Dropbox
 
 EXPOSE 17500
 
