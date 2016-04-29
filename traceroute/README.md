@@ -8,4 +8,4 @@ Set up an alias:
 
 Use it as a regular traceroute:
 
-`git traceroute google.com`
+`traceroute google.com`
