@@ -9,12 +9,13 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
         libmcrypt-dev \
         libpng12-dev \
         libbz2-dev \
+        libicu-dev \
         php-pear \
         curl \
         git \
         subversion \
         unzip && \
-    docker-php-ext-install -j$(nproc) bcmath mbstring sockets mcrypt zip bz2
+    docker-php-ext-install -j$(nproc) bcmath mbstring sockets mcrypt zip bz2 intl
 
 # Memory Limit
 RUN echo "memory_limit=-1" > $PHP_INI_DIR/conf.d/memory-limit.ini
