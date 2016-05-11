@@ -10,8 +10,8 @@ RUN apk add mono xdotool libgdiplus --no-cache --repository http://dl-3.alpineli
 
 USER user
 
-RUN wget http://downloads.sourceforge.net/project/keepass/KeePass%202.x/2.32/KeePass-2.32.zip -O keepass.zip && \
-    echo "b4aeb4ad09d62173e40720e18a35d8bc  keepass.zip" | md5sum -sc && \
+RUN wget http://downloads.sourceforge.net/project/keepass/KeePass%202.x/2.33/KeePass-2.33.zip -O keepass.zip && \
+    echo "b98fd89516f14b4afa66f7c839700293  keepass.zip" | md5sum -sc && \
     mkdir .keepass && \
     unzip keepass.zip -d .keepass && \
     rm keepass.zip
