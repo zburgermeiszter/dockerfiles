@@ -16,6 +16,8 @@ RUN wget http://downloads.sourceforge.net/project/keepass/KeePass%202.x/2.33/Kee
     unzip keepass.zip -d .keepass && \
     rm keepass.zip
 
+ADD ./plugins /home/user/.keepass/plugins
+
 ENV HOME /home/user/keepass
 
 ENTRYPOINT ["/bin/sh","-c","/usr/bin/mono /home/user/.keepass/KeePass.exe"]
