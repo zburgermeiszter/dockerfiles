@@ -6,10 +6,10 @@ Sync uses peer-to-peer technology to provide fast, private file sharing for team
 
 # Usage
 
-    BTSYNC_FOLDER=/path/to/btsync/storage//folder/on/the/host
+    BTSYNC_FOLDER=/path/to/btsync/storage/folder/on/the/host
     WEBUI_PORT=[ port to access the webui on the host ]
 
-    mkdir -p $DATA_FOLDER
+    mkdir -p BTSYNC_FOLDER
 
     docker run -d \
       -p 127.0.0.1:$WEBUI_PORT:8888 -p 55555:55555 \
