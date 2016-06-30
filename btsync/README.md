@@ -1,46 +1,22 @@
 BitTorrent Sync
 ===============
+*Forked from [B-C/sync-docker](https://github.com/B-C/sync-docker)*
 
 Sync uses peer-to-peer technology to provide fast, private file sharing for teams and individuals. By skipping the cloud, transfers can be significantly faster because files take the shortest path between devices. Sync does not store your information on servers in the cloud, avoiding cloud privacy concerns.
 
 # Usage
 
-    DATA_FOLDER=/path/to/data/folder/on/the/host
+    BTSYNC_FOLDER=/path/to/btsync/storage//folder/on/the/host
     WEBUI_PORT=[ port to access the webui on the host ]
 
     mkdir -p $DATA_FOLDER
 
-    docker run -d --name Sync \
-      -p 127.0.0.1:$WEBUI_PORT:8888 -p 55555 \
-      -v $DATA_FOLDER:/mnt/sync \
-      --restart on-failure \
-      bittorrent/sync
+    docker run -d \
+      -p 127.0.0.1:$WEBUI_PORT:8888 -p 55555:55555 \
+      -v $BTSYNC_FOLDER:/mnt/sync \
+      zburgermeiszter/btsync
 
 Go to localhost:$WEBUI_PORT in a web browser to access the webui.
-
-#### LAN access
-
-If you do not want to limit the access to the webui to localhost, run instead:
-
-    docker run -d --name Sync \
-      -p $WEBUI_PORT:8888 -p 55555 \
-      -v $DATA_FOLDER:/mnt/sync \
-      --restart on-failure \
-      bittorrent/sync
-
-#### Extra directories
-
-If you need to mount extra directories, mount them in /mnt/mounted_folders:
-
-    docker run -d --name Sync \
-      -p 127.0.0.1:$WEBUI_PORT:8888 -p 55555 \
-      -v $DATA_FOLDER:/mnt/sync \
-      -v <OTHER_DIR>:/mnt/mounted_folders/<DIR_NAME> \
-      -v <OTHER_DIR2>:/mnt/mounted_folders/<DIR_NAME2> \
-      --restart on-failure \
-      bittorrent/sync
-
-Do not create directories at the root of mounted_folders from the Sync webui since this new folder will not be mounted on the host.
 
 # Volume
 
