@@ -4,14 +4,16 @@ For maximum security it is regenerating the password hash salt, the hashed passw
 
 ## Usage:
 ```
-docker run -it --rm \
--p 8112:8112 \
--p 58846:58846 \
--p 58946:58946 \
--p 58946:58946/udp \ 
--v $PWD/media:/media \
--e PASSWORD=5up3R53cR37 \
-zburgermeiszter/deluge:1.3.12
+docker run -d \
+  --restart=unless-stopped \
+  -p 8112:8112 \
+  -p 58846:58846 \
+  -p 58946:58946 \
+  -p 58946:58946/udp \
+  -v /etc/localtime:/etc/localtime:ro \
+  -v $(pwd)/media:/media \
+  -e PASSWORD=5up3R53cR37 \
+  zburgermeiszter/deluge:1.3.12
 ```
 
 ## Volumes

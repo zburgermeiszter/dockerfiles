@@ -5,7 +5,7 @@ MAINTAINER Zoltan Burgermeiszter <zoltan@burgermeiszter.com>
 USER root
 
 RUN apk add deluge py-service_identity --no-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ && \
-    apk add --no-cache --update openssl curl
+    apk add --no-cache --update openssl
 
 # mkdir -p /usr/share/GeoIP && \
 # curl -s -k -L --compressed "http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz" > /usr/share/GeoIP/GeoIP.dat
