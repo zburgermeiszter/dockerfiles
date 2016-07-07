@@ -8,5 +8,3 @@ RUN addgroup -g 1000 user && \
 USER user
 
 WORKDIR "/home/user"
-
-ENTRYPOINT ["/bin/sh"]
