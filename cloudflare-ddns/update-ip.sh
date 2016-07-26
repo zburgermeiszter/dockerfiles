@@ -3,7 +3,11 @@
 # Credits: https://gist.github.com/siriulx/5cd60701949a52d8d1cfb83496bdc820#file-udocf-sh
 
 CF_API=https://api.cloudflare.com/client/v4
-PUBLIC_IP_V4=$(curl -s http://ipv4.icanhazip.com)
+PUBLIC_IP_V4=0.0.0.0
+
+getIp() {
+  echo $(drill myip.opendns.com @resolver1.opendns.com | grep ^myip.opendns.com. | cut -f5);
+}
 
 writeLog() {
     echo $(date -u "+%Y-%m-%dT%H:%M:%SZ") $@
@@ -35,13 +39,41 @@ updateRecord() {
                         -H "X-Auth-Email:${CF_AUTH_EMAIL}" \
                         -H "Content-Type: application/json" \
                         --data "$(printf '{"id":"%s","type":"A","name":"%s","content":"%s","ttl":1}' $RID $CF_RECORD $PUBLIC_IP_V4)")
-    writeLog "success:" $(echo ${result} | jq -r '.success')
+    local success=$(echo ${result} | jq -r '.success')
+    writeLog "success:" $success;
+
+    if [ "x"$success != "xtrue" ]
+    then
+      exit 1;
+    fi
 }
 
-run(){
+updateIp(){
+    PUBLIC_IP_V4=$(getIp)
     getZone
     getRecords
     updateRecord
 }
 
-run
+autoUpdate() {
+  while true;
+  do
+    CURRENT_IP=$(getIp)
+
+    if [ "x"${CURRENT_IP} != "x"${PUBLIC_IP_V4} ]
+    then
+      updateIp
+    fi
+
+    if [ "x"${UPDATE_INTERVAL} = "x" ]
+    then
+      exit 0
+    fi
+
+    sleep ${UPDATE_INTERVAL:-60}
+  done
+}
+
+if [ -z ${UPDATE_INTERVAL+false} ]; then updateIp; else autoUpdate; fi
+
+exit 0;
