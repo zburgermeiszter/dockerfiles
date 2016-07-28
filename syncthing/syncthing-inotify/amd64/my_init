@@ -8,6 +8,6 @@ GID=${GID:-1000}
 addgroup -S user -g $GID && \
         adduser -S -D -H -h $(pwd) -s /bin/sh -u $UID -G user -g user user
 
-chown -R $GID:$UID $(pwd)
+chown -R $GID:$UID $(pwd) $CHOWN
 
 su -s /bin/sh -c "$@" - user
