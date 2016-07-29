@@ -11,11 +11,9 @@ which makes the synchronisation near realtime.
 ## Usage:
 
 ```
-docker network create syncthing-network
-
 docker run \
         -d \
-        --net=syncthing-network \
+        --net=host \
         --name syncthing \
         -p 8384:8384 -p 22000:22000 -p 21027:21027/udp \
         -v $(pwd)/data:/syncthing \
@@ -26,7 +24,7 @@ docker run \
         
 docker run \
         -d \
-        --net=syncthing-network \
+        --net=host \
         --name syncthing-inotify \
         --volumes-from syncthing \
         -v /etc/localtime:/etc/localtime:ro \
