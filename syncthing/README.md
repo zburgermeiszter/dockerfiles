@@ -68,7 +68,7 @@ If you run it on a remote server, to enable remote web access yo have 2 alternat
 ### SSH Tunnel (preferred):
 Run the following command:
 ```
-ssh -L 8384:localhost:8384 user@remote.host
+ssh -N -L 8384:localhost:8384 user@remote.host
 ```
 Then visit [http://localhost:8384](http://localhost:8384)
 
