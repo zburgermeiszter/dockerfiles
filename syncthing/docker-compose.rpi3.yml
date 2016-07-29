@@ -1,0 +1,20 @@
+syncthing:
+  image: zburgermeiszter/syncthing:0.14.3-rpi3
+  net: host
+  volumes:
+    - ./data:/syncthing
+    - /etc/localtime:/etc/localtime:ro
+  env_file:
+    - .env
+  restart: unless-stopped
+
+syncthing-inotify:
+  image: zburgermeiszter/syncthing-inotify:0.8.3-rpi3
+  net: host
+  volumes:
+    - /etc/localtime:/etc/localtime:ro
+  volumes_from:
+    - syncthing
+  env_file:
+    - .env
+  restart: unless-stopped
