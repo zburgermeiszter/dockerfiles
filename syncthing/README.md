@@ -35,17 +35,29 @@ docker run \
 
 ## Usage with docker-compose
 
-Configure your data folder path and user and group IDs in the `.env` file.
+Configure your Syncthing folder path in `docker-compose.yml` file and user and group IDs in the `.env` file.
 
 ```
-docker-compose up
+docker-compose up -d
 ```
+
+## Configuration
+
+For first run, it will generate a default configuration.  
+By default Syncthing is available only from `localhost`. 
+
 
 ## Security
 
 By default Syncthing is only accessible from localhost.
-If you enable the access from everywhere for your peace of mind, enable the HTTPs in the settings.
-Go to `Actions -> Settings` to configure these.
+If you enable the access from everywhere it is strongly advised to set up a username and password and HTTPS in the  
+`Actions -> Settings` screen.
+
+If you run it on a remote server, and can not access to the web interface  
+you need to replace the `address` value to `0.0.0.0:8384` in the `gui` section in the `config.xml` file.  
+Then restart syncthing.
+
+For further configuration, please visit the official [Syncthing documentation](https://docs.syncthing.net/).
 
 ## Encryption
 
