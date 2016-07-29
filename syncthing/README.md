@@ -41,6 +41,18 @@ Configure your Syncthing folder path in `docker-compose.yml` file and user and g
 docker-compose up -d
 ```
 
+## Usage with Raspberry Pi 3
+
+To use this package on Raspberry Pi 3, the image names need to be suffixed with `-rpi3`.  
+Replace `zburgermeiszter/syncthing:0.14.3` with `zburgermeiszter/syncthing:0.14.3-rpi3` and  
+`zburgermeiszter/syncthing-inotify:0.8.3` with `zburgermeiszter/syncthing-inotify:0.8.3-rpi3`  
+in your `docker-compose.rpi3.yml` file or in the `docker run` commands.
+
+To start the package with `docker-compose` on Raspberry Pi 3 use the following command:  
+```
+docker-compose -f docker-compose.rpi3.yml -d
+```
+
 ## Configuration
 
 For first run, it will generate a default configuration.  
