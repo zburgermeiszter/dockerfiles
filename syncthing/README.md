@@ -43,15 +43,8 @@ docker-compose up
 
 ## Security
 
-By default your Syncthing container is available from anywhere on your network.  
-To restrict access only to your local host define the port mapping this way:  
-```
--p 127.0.0.1:8384:8384
-```
-
-Syncthing will keep complaining about the the availability, but using the restricted port configuration, it is pretty secure.  
-To get rid of the warning message, configuring a username and password is suggested.  
-To increase your peace of mind a bit further, enable the HTTPs in the settings.
+By default Syncthing is only accessible from localhost.
+If you enable the access from everywhere for your peace of mind, enable the HTTPs in the settings.
 Go to `Actions -> Settings` to configure these.
 
 ## Encryption
