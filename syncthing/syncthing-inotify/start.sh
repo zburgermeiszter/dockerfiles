@@ -9,4 +9,5 @@ ST_PORT=${ST_PORT:-8384}
 while true
 do
   syncthing-inotify -target="$PROTOCOL://$ST_HOST:$ST_PORT" -api=$APIKEY
+  echo "Restarting syncthing-inotify";
 done;
