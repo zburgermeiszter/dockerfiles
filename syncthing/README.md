@@ -50,7 +50,7 @@ in your `docker-compose.rpi3.yml` file or in the `docker run` commands.
 
 To start the package with `docker-compose` on Raspberry Pi 3 use the following command:  
 ```
-docker-compose -f docker-compose.rpi3.yml -d
+docker-compose -f docker-compose.rpi3.yml -d up
 ```
 
 ## Configuration
