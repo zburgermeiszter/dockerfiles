@@ -9,7 +9,7 @@ setup() {
 }
 
 if [ ! -f $CONFIG_FILE ]; then
-    echo "Config not found! Generating..."
+    echo "Config file ($CONFIG_FILE) not found! Generating..."
     setup
 fi
 
