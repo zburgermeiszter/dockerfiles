@@ -1,5 +1,5 @@
 syncthing:
-  image: syncthing
+  image: zburgermeiszter/syncthing:0.14.3
   ports:
    - 8384:8384
    - 22000:22000
@@ -12,7 +12,7 @@ syncthing:
   restart: unless-stopped
 
 syncthing-inotify:
-  image: syncthing-inotify
+  image: zburgermeiszter/syncthing-inotify:0.8.3
   links:
     - syncthing:syncthing
   volumes:
