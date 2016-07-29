@@ -62,12 +62,22 @@ By default Syncthing is available only from `localhost`.
 ## Security
 
 By default Syncthing is only accessible from localhost.
+
+If you run it on a remote server, to enable remote web access yo have 2 alternatives:
+
+### SSH Tunnel (preferred):
+Run the following command:
+```
+ssh -L 8384:localhost:8384 user@remote.host
+```
+Then visit [http://localhost:8384](http://localhost:8384)
+
+### Config file
+Replace the `address` value to `0.0.0.0:8384` in the `gui` section in the `config.xml` file.  
+Then restart Syncthing.
+
 If you enable the access from everywhere it is strongly advised to set up a username and password and HTTPS in the  
 `Actions -> Settings` screen.
-
-If you run it on a remote server, and can not access to the web interface  
-you need to replace the `address` value to `0.0.0.0:8384` in the `gui` section in the `config.xml` file.  
-Then restart syncthing.
 
 For further configuration, please visit the official [Syncthing documentation](https://docs.syncthing.net/).
 
