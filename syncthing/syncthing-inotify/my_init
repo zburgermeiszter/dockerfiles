@@ -10,4 +10,4 @@ addgroup -S user -g $GID && \
 
 chown -R $GID:$UID $(pwd) $CHOWN
 
-su -s /bin/sh -c "$@" - user
+su -s /bin/sh -c "$@" user
