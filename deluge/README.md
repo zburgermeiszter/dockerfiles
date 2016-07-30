@@ -6,14 +6,15 @@ For maximum security it is regenerating the password hash salt, the hashed passw
 ```
 docker run -d \
   --restart=unless-stopped \
+  --name=deluge \
   -p 8112:8112 \
   -p 58846:58846 \
   -p 58946:58946 \
   -p 58946:58946/udp \
   -v /etc/localtime:/etc/localtime:ro \
-  -v $(pwd)/media:/media \
+  -v $(pwd)/deluge:/deluge \
   -e PASSWORD=5up3R53cR37 \
-  zburgermeiszter/deluge:1.3.12
+  zburgermeiszter/deluge:1.3.12-rev2
 ```
 
 ## Volumes
