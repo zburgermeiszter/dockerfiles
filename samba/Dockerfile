@@ -1,5 +1,7 @@
 FROM alpine:3.4
 
+MAINTAINER Zoltan Burgermeiszter <zoltan@burgermeiszter.com>
+
 RUN apk add --update --no-cache samba samba-common-tools
 
 ADD smb.conf /etc/samba/smb.conf
