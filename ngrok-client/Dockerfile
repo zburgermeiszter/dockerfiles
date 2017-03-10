@@ -19,5 +19,6 @@ RUN chown user:user /usr/bin/ngrok && \
 USER user
 
 RUN mkdir -p /home/user/.ngrok2
+RUN echo "web_addr: 0.0.0.0:4040" > /home/user/.ngrok2/ngrok.yml
 
 ENTRYPOINT ["/usr/bin/entrypoint.sh"]
